@@ -8,7 +8,7 @@ import os
 from app.routes.api_v1 import api
 
 USERNAME = 'admin'
-PASSWORD = 'banana'
+PASSWORD = 'admin'
 security = HTTPBasic()
 
 app = FastAPI(
