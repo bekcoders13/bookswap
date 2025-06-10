@@ -1,17 +1,27 @@
-import smtplib
+import os
 from email.message import EmailMessage
+import aiosmtplib
+from dotenv import load_dotenv
+load_dotenv()
 
-SMTP_SENDER = "a48468908@gmail.com"
-SMTP_PASSWORD = "lslz fktl ewif ildn"
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = int(os.getenv("EMAIL_PORT"))
+EMAIL_USER = os.getenv("EMAIL_USER")
+EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
 
 
-def send_otp_email(to_email: str, code: str):
-    msg = EmailMessage()
-    msg["Subject"] = "Your BookSwap Login Code"
-    msg["From"] = SMTP_SENDER
-    msg["To"] = to_email
-    msg.set_content(f"Your login code: {code}")
+async def send_otp_email(to_email: str, subject: str, content: str):
+    message = EmailMessage()
+    message["From"] = EMAIL_USER
+    message["To"] = to_email
+    message["Subject"] = subject
+    message.set_content(content, subtype="html")  # HTML email yuborish uchun
 
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-        server.login(SMTP_SENDER, SMTP_PASSWORD)
-        server.send_message(msg)
+    await aiosmtplib.send(
+        message,
+        hostname=EMAIL_HOST,
+        port=EMAIL_PORT,
+        username=EMAIL_USER,
+        password=EMAIL_PASSWORD,
+        start_tls=True
+    )

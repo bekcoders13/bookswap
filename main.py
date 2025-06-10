@@ -17,10 +17,10 @@ app = FastAPI(
         'name': "ASILBEK",
         'url': 'https://t.me/murojaat13_bot',
     },
-    description="Boss username: sherozbek1998, "
-                "Boss password: %,@&@L6wwckH2fK: "
-                "Admin username: admin, "
-                "Admin password: admin123",
+    description="Boss username:  "
+                "Boss password: "
+                "Admin username: "
+                "Admin password: ",
     docs_url=None,
     redoc_url=None,
 )
