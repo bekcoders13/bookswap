@@ -6,6 +6,8 @@ from fastapi.staticfiles import StaticFiles
 import os
 
 from app.routes.api_v1 import api
+from app.db import Base, engine
+Base.metadata.create_all(bind=engine)
 
 USERNAME = 'admin'
 PASSWORD = 'admin'

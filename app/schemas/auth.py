@@ -1,12 +1,20 @@
 from pydantic import BaseModel, EmailStr
 
+
 class SendOTPRequest(BaseModel):
     email: EmailStr
+
 
 class VerifyOTPRequest(BaseModel):
     email: EmailStr
     otp_code: str
 
-class TokenResponse(BaseModel):
+
+class Token(BaseModel):
+    id: int
     access_token: str
-    token_type: str = "bearer"
+    token_type: str
+
+
+class TokenData(BaseModel):
+    email: str
